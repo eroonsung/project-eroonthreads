@@ -39,9 +39,10 @@ function ThreadCard({
   comments,
   isComment,
 }: Props) {
+
   return (
     <article
-      className={`flex w-full flex-col rounded-xl ${
+      className={`flex w-full flex-col rounded-xl mb-3 ${
         isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
       }`}
     >
@@ -164,7 +165,7 @@ function ThreadCard({
         </Link>
       ) : (
         <>
-          <div className="mt-5 flex items-center">
+          <div className="mt-3 flex items-center">
             <p className="text-subtle-medium text-gray-1">
               {formatDateString(createdAt)}
             </p>
