@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import Community from "../models/community.model";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
+import Like from "../models/like.model";
 
 import { connectToDB } from "../mongoose";
 
@@ -79,12 +80,19 @@ export async function fetchUserPosts(userId: string) {
         {
           path: "children",
           model: Thread,
-          populate: {
+          populate: [{
             path: "author",
             model: User,
             select: "name image id", // Select the "name" and "_id" fields from the "User" model
-          },
+          },{
+            path: "likes",
+            model: Like,
+          }],
         },
+        {
+          path: "likes",
+          model: Like,
+        }
       ],
     });
 

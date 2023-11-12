@@ -7,6 +7,7 @@ import { connectToDB } from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import Like from "../models/like.model";
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectToDB();
@@ -34,7 +35,12 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
         model: User,
         select: "_id name parentId image", // Select only _id and username fields of the author
       },
-    });
+    })
+    .populate({
+      path:"likes",
+      model:Like,
+    })
+    ;
 
   // Count the total number of top-level posts (threads) i.e., threads that are not comments.
   const totalPostsCount = await Thread.countDocuments({
@@ -183,13 +189,25 @@ export async function fetchThreadById(threadId: string) {
           {
             path: "children", // Populate the children field within children
             model: Thread, // The model of the nested children (assuming it's the same "Thread" model)
-            populate: {
+            populate: [{
               path: "author", // Populate the author field within nested children
               model: User,
               select: "_id id name parentId image", // Select only _id and username fields of the author
             },
+            {
+              path:"likes",
+              model:Like,
+            }],
           },
+          {
+            path:"likes",
+            model:Like,
+          }
         ],
+      })
+      .populate({
+        path:"likes",
+        model:Like,
       })
       .exec();
 

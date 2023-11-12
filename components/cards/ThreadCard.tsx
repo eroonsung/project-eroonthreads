@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
+import LikeThread from "../forms/LikeThread";
 
 interface Props {
   id: string;
@@ -26,6 +27,9 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  likes: {
+    isLiked: boolean;
+  }[];
 }
 
 function ThreadCard({
@@ -38,7 +42,17 @@ function ThreadCard({
   createdAt,
   comments,
   isComment,
+  likes,
 }: Props) {
+
+  let isLikedNow = false;
+  if (likes.length > 0) {
+    likes.map((like) => {
+      isLikedNow = like.isLiked;
+    });
+  } else {
+    isLikedNow = false;
+  }
 
   return (
     <article
@@ -72,13 +86,20 @@ function ThreadCard({
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
-                <Image
+                {/* <Image
                   src="/assets/heart-gray.svg"
                   alt="heart"
                   width={24}
                   height={24}
                   className="cursor-pointer object-contain"
+                /> */}
+
+                <LikeThread
+                  threadId={JSON.stringify(id)}
+                  currentUserId={currentUserId}
+                  isLiked={isLikedNow}
                 />
+
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"

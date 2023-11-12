@@ -5,6 +5,7 @@ import { FilterQuery, SortOrder } from "mongoose";
 import Community from "../models/community.model";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
+import Like from "../models/like.model";
 
 import { connectToDB } from "../mongoose";
 
@@ -74,7 +75,8 @@ export async function fetchCommunityPosts(id: string) {
   try {
     connectToDB();
 
-    const communityPosts = await Community.findById(id).populate({
+    const communityPosts = await Community.findById(id)
+    .populate({
       path: "threads",
       model: Thread,
       populate: [
@@ -91,14 +93,24 @@ export async function fetchCommunityPosts(id: string) {
         {
           path: "children",
           model: Thread,
-          populate: {
+          populate: [{
             path: "author",
             model: User,
             select: "image _id", // Select the "name" and "_id" fields from the "User" model
-          },
+          }
+          ,{
+            path: "likes",
+            model: Like,
+          }],
         },
+        {
+          path: "likes",
+          model: Like,
+        }
+        ,
       ],
-    });
+    })
+    ;
 
     return communityPosts;
   } catch (error) {
