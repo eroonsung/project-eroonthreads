@@ -1,4 +1,4 @@
-# 💜: Eroon Threads
+# 💜 Eroon Threads
 :arrow_right: <a href="https://project-erooncarhub-1ubiuw6v0-eroonsungs-projects.vercel.app/" target="_blank">Eroon Threads</a> 
 <img width="1258" alt="image" src="https://github.com/eroonsung/project-eroonthreads/assets/77269204/8f1bca81-4da8-4269-8e0d-134cbeabc0b8">
 📌 Search
