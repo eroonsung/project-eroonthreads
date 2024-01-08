@@ -18,8 +18,9 @@ This project is a web application clone of <a href="https://project-erooncarhub-
 이 프로젝트는 2023년 새롭게 등장한 소셜미디어인 <a href="https://project-erooncarhub-1ubiuw6v0-eroonsungs-projects.vercel.app/" target="_blank">Threads</a>를 재구성하여 클론코딩 하였습니다. Typescript를 사용하여 만들었으며 사용자 검색, 쓰레드 작성, 커뮤티티 안에서 쓰레드 공유 등의 기능을 사용할 수 있습니다. 
 
 ## :gear: Built With 개발 환경
-- Typescript
 - Next.js 13
+- Typescript
+- React
 - Clerk (User management)
 - Mongo DB
 - Vercel
