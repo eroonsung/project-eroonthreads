@@ -19,6 +19,7 @@ This project is a web application clone of <a href="https://project-erooncarhub-
 
 ## :gear: Built With 개발 환경
 - Typescript
+- Next.js 13
 - Clerk (User management)
 - Mongo DB
 - Vercel
